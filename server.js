@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const userRouter = require('./routes/users');
-const req = require('express/lib/request');
 
 const app = express();
 
@@ -13,20 +12,20 @@ let users = [];
 
 class User {
   constructor(email, password) {
-    this.email;
-    this.password;
+    this.email = email;
+    this.password = password;
   }
 }
 
-app.post('/create', (req, res) => {
-  let email = req.body.emaill;
+app.post('/', (req, res) => {
+  let email = req.body.email;
   let password = req.body.password;
   let newUser = new User(email, password);
   users.push(newUser);
   res.json(users[0]);
 });
 
-app.get('/get', (req, res) => {
+app.get('/', (req, res) => {
   res.send(users[0]);
 });
 
